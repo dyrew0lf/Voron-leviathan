@@ -1,3 +1,8 @@
+[include mmu/base/*.cfg]
+[include mmu/addons/blobifier.cfg]
+[include mmu/addons/mmu_erec_cutter.cfg]
+[include mmu/optional/client_macros.cfg]
+#[include mmu/optional/mmu_menu.cfg]
 [include shell_command.cfg]
 [include mainsail.cfg]
 [include stealthburner_leds.cfg]
@@ -391,9 +396,6 @@ bicubic_tension: 0.2
 zero_reference_position: 175, 200    
 # set this to themiddle of your bed
 
-[skew_correction]
-
-
 [quad_gantry_level]
 gantry_corners:
 	-60,-10
@@ -521,8 +523,6 @@ gcode:
   {% set x_wait = printer.toolhead.axis_maximum.x|float / 2 %}
   {% set y_wait = printer.toolhead.axis_maximum.y|float / 2 %}
 
-  SKEW_PROFILE LOAD=CaliFlower
-
   # turn on caselights
   SET_LED LED=disco RED=1 Green=1 Blue=1 Transmit=1
 
@@ -637,7 +637,6 @@ gcode:
     SET_LED LED=disco RED=0 Green=0 Blue=0 Transmit=1
     
     BED_MESH_CLEAR
-    SET_SKEW CLEAR=1
     RESTORE_GCODE_STATE NAME=STATE_PRINT_END
 
 [pause_resume]
@@ -660,7 +659,6 @@ gcode:
     G1 E-200 F1000
     RESTORE_GCODE_STATE NAME=M600_state
 
-[include AFC/*.cfg]
 #*# <---------------------- SAVE_CONFIG ---------------------->
 #*# DO NOT EDIT THIS BLOCK OR BELOW. The contents are auto-generated.
 #*#
@@ -702,7 +700,7 @@ gcode:
 #*#
 #*# [scanner]
 #*# scanner_touch_threshold = 3000
-#*# scanner_touch_z_offset = 0.020
+#*# scanner_touch_z_offset = 0.000
 #*# mode = touch
 #*# scanner_touch_speed = 2
 #*#
@@ -770,8 +768,3 @@ gcode:
 #*# max_x = 330.0
 #*# min_y = 20.0
 #*# max_y = 300.0
-#*#
-#*# [skew_correction CaliFlower]
-#*# xy_skew = 0.0025106836493533923
-#*# xz_skew = 0.0
-#*# yz_skew = 0.0
